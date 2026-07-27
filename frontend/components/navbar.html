@@ -1,0 +1,40 @@
+<nav class="screen-nav">
+  <button class="mobile-menu-btn" onclick="document.getElementById('sidebarOverlay').classList.toggle('open')" aria-label="Menu">☰</button>
+  <div class="logo">GA</div>
+  <span class="brand">GotJobAlert</span>
+  <div class="screen-list">
+    <a href="#dashboard" class="active">Dashboard</a>
+    <a href="#search">Job Search</a>
+    <a href="#details">Job Details</a>
+    <a href="#saved">Saved Jobs</a>
+    <a href="#tracker">Applications</a>
+    <a href="#resume">Resume</a>
+    <a href="#notifications">Notifications</a>
+    <a href="#profile">Profile</a>
+    <a href="#settings">Settings</a>
+    <a href="#login">Login</a>
+    <a href="#register">Register</a>
+  </div>
+</nav>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="if(event.target===this||event.target.classList.contains('backdrop'))closeSidebar()">
+  <div class="backdrop"></div>
+  <div class="sidebar-drawer">
+    <div class="logo-area">
+      <div class="logo">GA</div>
+      <span class="brand">GotJobAlert</span>
+    </div>
+    <a href="#dashboard" onclick="closeSidebar()">Dashboard</a>
+    <a href="#search" onclick="closeSidebar()">Job Search</a>
+    <a href="#details" onclick="closeSidebar()">Job Details</a>
+    <a href="#saved" onclick="closeSidebar()">Saved Jobs</a>
+    <a href="#tracker" onclick="closeSidebar()">Application Tracker</a>
+    <a href="#resume" onclick="closeSidebar()">Resume Assistant</a>
+    <a href="#notifications" onclick="closeSidebar()">Notifications</a>
+    <a href="#profile" onclick="closeSidebar()">Profile</a>
+    <a href="#settings" onclick="closeSidebar()">Settings</a>
+    <div class="divider"></div>
+    <a href="#login" onclick="closeSidebar()">Login</a>
+    <a href="#register" onclick="closeSidebar()">Register</a>
+  </div>
+</div>

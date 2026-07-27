@@ -1,0 +1,63 @@
+<section class="screen active" id="tracker">
+  <div class="screen-header">
+    <div class="breadcrumb">Applications / Tracker</div>
+    <div class="flex-row">
+      <h2>Application Tracker</h2>
+      <div class="actions">
+        <span class="btn btn-sm btn-ghost">Export CSV</span>
+        <span class="btn btn-sm btn-primary">Add Application</span>
+      </div>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="tracker-stats">
+      <div class="card card-sm" style="text-align:center"><div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;font-weight:600">Applied</div><div style="font-size:20px;font-weight:700;color:var(--gray-900)">12</div></div>
+      <div class="card card-sm" style="text-align:center"><div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;font-weight:600">Interview</div><div style="font-size:20px;font-weight:700;color:var(--gray-900)">4</div></div>
+      <div class="card card-sm" style="text-align:center"><div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;font-weight:600">Offer</div><div style="font-size:20px;font-weight:700;color:var(--gray-900)">2</div></div>
+      <div class="card card-sm" style="text-align:center"><div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;font-weight:600">Rejected</div><div style="font-size:20px;font-weight:700;color:var(--gray-900)">3</div></div>
+    </div>
+
+    <div class="tracker-content">
+      <div>
+        <div class="card">
+          <div style="font-size:12px;font-weight:600;color:var(--gray-900);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px">Application Timeline</div>
+          <div style="display:flex;gap:10px;padding:8px 0"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;background:var(--gray-600);flex-shrink:0"></div><div style="width:2px;height:28px;background:var(--gray-200)"></div></div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Application Submitted</div><div style="font-size:10px;color:var(--gray-400)">Google — Jul 22, 2026</div></div></div>
+          <div style="display:flex;gap:10px;padding:8px 0"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;background:var(--gray-600);flex-shrink:0"></div><div style="width:2px;height:28px;background:var(--gray-200)"></div></div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Resume Reviewed</div><div style="font-size:10px;color:var(--gray-400)">Google — Jul 24, 2026</div></div></div>
+          <div style="display:flex;gap:10px;padding:8px 0"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;background:var(--gray-800);flex-shrink:0;box-shadow:0 0 0 3px var(--gray-200)"></div><div style="width:2px;height:28px;background:var(--gray-200)"></div></div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Technical Interview</div><div style="font-size:10px;color:var(--gray-400)">Google — Jul 28, 2026</div></div></div>
+          <div style="display:flex;gap:10px;padding:8px 0"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;background:var(--gray-300);flex-shrink:0"></div></div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">System Design Round</div><div style="font-size:10px;color:var(--gray-400)">TBD</div></div></div>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-100)">
+            <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--gray-500);font-weight:600">Overall Progress</span><span style="color:var(--gray-900);font-weight:600">55%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div style="font-size:12px;font-weight:600;color:var(--gray-900);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px">Progress Overview</div>
+          <div class="progress-item"><div class="phead"><span class="plabel">Applications</span><span class="pval">12/24</span></div><div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div></div>
+          <div class="progress-item"><div class="phead"><span class="plabel">Interviews</span><span class="pval">4/24</span></div><div class="progress-bar"><div class="progress-fill" style="width:17%"></div></div></div>
+          <div class="progress-item"><div class="phead"><span class="plabel">Offers</span><span class="pval">2/24</span></div><div class="progress-bar"><div class="progress-fill" style="width:8%"></div></div></div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900)">All Applications</div>
+            <div class="btn btn-sm">All Status ▼</div>
+          </div>
+          <div class="recent-table">
+            <table class="table">
+              <thead><tr><th>Company</th><th>Position</th><th class="hide-mobile">Date</th><th>Status</th><th></th></tr></thead>
+              <tbody>
+                <tr><td><div class="cell-flex"><div class="avatar-sm">G</div>Google</div></td><td>Frontend</td><td class="hide-mobile">Jul 22</td><td><span class="badge badge-blue">Interview</span></td><td style="text-align:right;font-size:10px;color:var(--gray-500)">View</td></tr>
+                <tr><td><div class="cell-flex"><div class="avatar-sm">S</div>Stripe</div></td><td>Full Stack</td><td class="hide-mobile">Jul 19</td><td><span class="badge badge-green">Offer</span></td><td style="text-align:right;font-size:10px;color:var(--gray-500)">View</td></tr>
+                <tr><td><div class="cell-flex"><div class="avatar-sm">M</div>Microsoft</div></td><td>React Native</td><td class="hide-mobile">Jul 17</td><td><span class="badge">Applied</span></td><td style="text-align:right;font-size:10px;color:var(--gray-500)">View</td></tr>
+                <tr><td><div class="cell-flex"><div class="avatar-sm">N</div>Notion</div></td><td>Design</td><td class="hide-mobile">Jul 14</td><td><span class="badge badge-red">Rejected</span></td><td style="text-align:right;font-size:10px;color:var(--gray-500)">View</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+.screen-nav .brand{font-size:14px;font-weight:700}
+.screen-nav .screen-list a{font-size:12px}
+.screen-header .breadcrumb{font-size:10px;color:var(--gray-400);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.screen-header h2{font-size:17px;font-weight:700;color:var(--gray-900)}
+.btn{font-size:13px;font-weight:600}
+.btn-sm{font-size:12px}
+.btn-xs{font-size:11px}
+.badge{font-size:10px;font-weight:600}
+.tag{font-size:10px}
+.avatar{font-size:12px;font-weight:700}
+.avatar-sm{font-size:10px}
+.avatar-lg{font-size:14px}
+.initial-box{font-size:11px;font-weight:700;color:var(--gray-400)}
+.table th{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.table td{font-size:12px}
+.job-info .title{font-size:13px;font-weight:600;color:var(--gray-900)}
+.job-info .meta{font-size:11px;color:var(--gray-400);margin-top:2px}
+.job-info .salary{font-size:12px;font-weight:600;color:var(--gray-900);margin-top:4px}
+.search-bar-wrap input{font-size:13px}
+.filter-panel h4{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:10px}
+.filter-group label{font-size:12px;font-weight:600;color:var(--gray-600);display:block;margin-bottom:6px}
+.check-item{font-size:13px;color:var(--gray-600)}
+.results-header .count{font-size:12px;color:var(--gray-400)}
+.results-header .sort{font-size:11px;color:var(--gray-400)}
+.results-header .sort .pill{font-size:12px;color:var(--gray-600)}
+.pagination .page{font-size:12px;color:var(--gray-500)}
+.company-header .info h3{font-size:15px;font-weight:700;color:var(--gray-900)}
+.company-header .info .loc{font-size:11px;color:var(--gray-400);margin-top:2px}
+.info-item .ilabel{font-size:10px;color:var(--gray-400)}
+.info-item .ivalue{font-size:13px;font-weight:600;color:var(--gray-900)}
+.upload-zone .utext{font-size:13px;font-weight:600;color:var(--gray-900);margin-bottom:4px}
+.upload-zone .usub{font-size:11px;color:var(--gray-400);margin-bottom:12px}
+.ats-circle{font-size:22px;font-weight:700;color:var(--gray-900)}
+.ats-info .ats-label{font-size:13px;font-weight:600;color:var(--gray-900)}
+.ats-info .ats-sub{font-size:11px;color:var(--gray-400)}
+.sug-num{font-size:10px;font-weight:700;color:var(--gray-500)}
+.notif-tab{font-size:12px;color:var(--gray-400)}
+.settings-tab{font-size:12px;color:var(--gray-400)}
+.profile-header .pinfo h3{font-size:15px;font-weight:700;color:var(--gray-900)}
+.profile-header .pinfo .prole{font-size:12px;color:var(--gray-400)}
+.auth-header h2{font-size:20px;font-weight:700;color:var(--gray-900)}
+.auth-header p{font-size:13px;color:var(--gray-400);margin-top:4px}
+.auth-link{font-size:13px;color:var(--gray-400);margin-top:16px;padding:4px 0}
+.input-group label{font-size:12px;font-weight:600;color:var(--gray-600)}
