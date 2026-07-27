@@ -1,0 +1,23 @@
+{
+  "projectName": "JobOS",
+  "projectOwner": "SachinKumarChaudhary",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": ["README.md"],
+  "imageSize": 100,
+  "commit": false,
+  "contributorsPerLine": 7,
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/github/all-contributors/SachinKumarChaudhary/JobOS?color=ee8449&style=flat-square)](#contributors)",
+  "contributorTemplate": "<a href=\"%(profile)\"><img src=\"%(avatar_url)\" width=\"%(image_size)s\" alt=\"%(name)s\"/><br /><sub><b>%(name)s</b></sub></a>",
+  "types": {
+    "code": "Code",
+    "doc": "Documentation",
+    "design": "Design",
+    "ideas": "Ideas",
+    "review": "Code Review",
+    "test": "Tests",
+    "bug": "Bug Reports",
+    "infra": "Infrastructure",
+    "tool": "Tools"
+  }
+}
