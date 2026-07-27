@@ -1,0 +1,3 @@
+function initSettings() {
+  // Settings init
+}

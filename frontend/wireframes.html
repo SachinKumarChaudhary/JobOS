@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GotJobAlert — Responsive Wireframes</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gray-50:#fafafa;--gray-100:#f5f5f5;--gray-200:#eee;--gray-300:#ccc;--gray-400:#999;--gray-500:#666;--gray-600:#444;--gray-700:#333;--gray-800:#222;--gray-900:#111;--radius:12px;--radius-sm:8px;--shadow:0 1px 3px rgba(0,0,0,.08);--nav-h:56px;--sidebar-w:240px}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--gray-50);color:var(--gray-800);line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* === Global Nav === */
+.screen-nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:#fff;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 12px;z-index:100;gap:10px}
+.screen-nav .logo{width:32px;height:32px;background:var(--gray-800);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700;flex-shrink:0}
+.screen-nav .brand{font-size:14px;font-weight:700;color:var(--gray-900);display:none}
+.screen-nav .mobile-menu-btn{background:none;border:1px solid var(--gray-200);border-radius:var(--radius-sm);min-width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;color:var(--gray-600);font-size:20px}
+.screen-nav .screen-list{display:none;gap:4px;overflow-x:auto;flex:1;-webkit-overflow-scrolling:touch}
+.screen-nav .screen-list a{padding:8px 14px;font-size:12px;border-radius:var(--radius-sm);white-space:nowrap;color:var(--gray-500);transition:all .15s}
+.screen-nav .screen-list a:hover,.screen-nav .screen-list a.active{background:var(--gray-100);color:var(--gray-900);font-weight:600}
+
+/* Mobile sidebar drawer */
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:90}
+.sidebar-overlay.open{display:block}
+.sidebar-overlay .backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.3)}
+.sidebar-drawer{position:absolute;left:0;top:0;bottom:0;width:280px;background:#fff;border-right:1px solid var(--gray-200);box-shadow:4px 0 12px rgba(0,0,0,0.08);overflow-y:auto;padding:16px 12px;transform:translateX(-100%);transition:transform .25s ease}
+.sidebar-overlay.open .sidebar-drawer{transform:translateX(0)}
+.sidebar-drawer a{display:flex;align-items:center;gap:10px;padding:12px 14px;font-size:13px;border-radius:var(--radius-sm);color:var(--gray-600)}
+.sidebar-drawer a:hover{background:var(--gray-100);color:var(--gray-900);font-weight:600}
+.sidebar-drawer .divider{height:1px;background:var(--gray-200);margin:8px 0}
+.sidebar-drawer .logo-area{display:flex;align-items:center;gap:10px;padding:8px 14px 16px;margin-bottom:8px;border-bottom:1px solid var(--gray-200)}
+.sidebar-drawer .logo-area .logo{width:32px;height:32px;background:var(--gray-800);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700}
+.sidebar-drawer .logo-area .brand{font-size:15px;font-weight:700;color:var(--gray-900)}
+
+/* === Screens === */
+.screen{padding-top:var(--nav-h);min-height:100vh;max-width:100vw}
+.screen-header{background:#fff;border-bottom:1px solid var(--gray-200);padding:10px 12px;position:sticky;top:var(--nav-h);z-index:10}
+.screen-header .breadcrumb{font-size:10px;color:var(--gray-400);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.screen-header .flex-row{display:flex;align-items:center;justify-content:space-between}
+.screen-header h2{font-size:17px;font-weight:700;color:var(--gray-900)}
+.screen-header .actions{display:flex;gap:6px;flex-wrap:wrap}
+
+/* === UI Components — touch-friendly defaults === */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:0 18px;min-height:44px;font-size:13px;font-weight:600;border-radius:var(--radius-sm);border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:default;white-space:nowrap;transition:all .15s}
+.btn-primary{background:var(--gray-800);color:#fff;border-color:var(--gray-800)}
+.btn-sm{min-height:44px;padding:0 14px;font-size:12px}
+.btn-xs{min-height:36px;padding:0 12px;font-size:11px}
+.btn-ghost{border-color:transparent;background:transparent}
+.card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:14px}
+.card-sm{padding:10px}
+.badge{display:inline-flex;align-items:center;padding:4px 12px;font-size:10px;font-weight:600;border-radius:20px;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-200);min-height:26px}
+.badge-blue{background:var(--gray-200);color:var(--gray-700)}
+.badge-green{background:var(--gray-300);color:var(--gray-800)}
+.badge-red{background:var(--gray-400);color:#fff}
+.tag{display:inline-flex;padding:6px 12px;font-size:10px;border-radius:var(--radius-sm);background:var(--gray-100);border:1px solid var(--gray-200);color:var(--gray-600)}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--gray-200);border:1px solid var(--gray-300);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gray-500);flex-shrink:0}
+.avatar-sm{width:32px;height:32px;font-size:10px}
+.avatar-lg{width:52px;height:52px;font-size:14px}
+.initial-box{width:40px;height:40px;border-radius:var(--radius-sm);background:var(--gray-100);border:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gray-400);flex-shrink:0}
+.toggle{width:44px;height:24px;border-radius:12px;background:var(--gray-200);position:relative;flex-shrink:0}
+.toggle.on{background:var(--gray-500)}
+.toggle::after{content:'';width:20px;height:20px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;box-shadow:0 1px 2px rgba(0,0,0,.1);transition:all .15s}
+.toggle.on::after{left:22px}
+.line{height:8px;background:var(--gray-100);border-radius:4px}
+.line-sm{height:6px}
+.line-lg{height:12px}
+.line-w{width:60%}
+.line-40{width:40%}
+.line-80{width:80%}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--gray-300);flex-shrink:0}
+.dot-active{background:var(--gray-600)}
+.progress-bar{height:8px;background:var(--gray-100);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--gray-500);border-radius:4px}
+.divider{height:1px;background:var(--gray-200);margin:12px 0}
+.input{min-height:44px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:0 14px;font-size:13px;background:#fff;width:100%;outline:none}
+.input-group{display:flex;flex-direction:column;gap:4px}
+.input-group label{font-size:12px;font-weight:600;color:var(--gray-600)}
+
+/* === Tables — mobile card fallback === */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px;padding:0 4px}
+.table{width:100%;border-collapse:collapse;font-size:12px;min-width:500px}
+.table th{text-align:left;padding:10px 12px;font-size:10px;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--gray-200)}
+.table td{padding:10px 12px;border-bottom:1px solid var(--gray-100);color:var(--gray-600)}
+.table tr:last-child td{border-bottom:none}
+.table .cell-flex{display:flex;align-items:center;gap:8px}
+
+/* === Dashboard === */
+.stats-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:14px}
+.dash-content{display:grid;grid-template-columns:1fr;gap:12px}
+.dash-bottom{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+.recent-table{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.job-card{display:flex;gap:12px;padding:12px 0}
+.job-card+.job-card{border-top:1px solid var(--gray-100)}
+.job-info{min-width:0;flex:1}
+.job-info .title{font-size:13px;font-weight:600;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.job-info .meta{font-size:11px;color:var(--gray-400);margin-top:2px}
+.job-info .salary{font-size:12px;font-weight:600;color:var(--gray-900);margin-top:4px}
+
+/* === Job Search === */
+.search-layout{display:grid;grid-template-columns:1fr;gap:14px}
+.search-bar-wrap{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:8px 12px}
+.search-bar-wrap .search-icon{width:20px;height:20px;background:var(--gray-200);border-radius:3px;flex-shrink:0}
+.search-bar-wrap input{flex:1;border:none;outline:none;font-size:13px;background:transparent;min-height:30px}
+.filter-panel{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:14px}
+.filter-panel h4{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:10px}
+.filter-group{margin-bottom:12px}
+.filter-group label{font-size:12px;font-weight:600;color:var(--gray-600);display:block;margin-bottom:6px}
+.check-list{display:flex;flex-direction:column;gap:8px}
+.check-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gray-600);min-height:44px}
+.check-item .box{width:18px;height:18px;border:1.5px solid var(--gray-300);border-radius:3px;flex-shrink:0}
+.check-item .box.checked{background:var(--gray-500);border-color:var(--gray-500);position:relative}
+.check-item .box.checked::after{content:'✓';color:#fff;font-size:11px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.results-header .count{font-size:12px;color:var(--gray-400)}
+.results-header .sort{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--gray-400)}
+.results-header .sort .pill{min-height:36px;padding:0 12px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);display:flex;align-items:center;font-size:12px;color:var(--gray-600);background:#fff}
+.job-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap}
+.pagination .page{min-width:44px;height:44px;border-radius:var(--radius-sm);border:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gray-500);background:#fff}
+.pagination .page.active{background:var(--gray-800);color:#fff;border-color:var(--gray-800)}
+
+/* === Job Details === */
+.details-layout{display:grid;grid-template-columns:1fr;gap:14px}
+.company-header{display:flex;gap:12px;align-items:flex-start}
+.company-header .info h3{font-size:15px;font-weight:700;color:var(--gray-900)}
+.company-header .info .loc{font-size:11px;color:var(--gray-400);margin-top:2px}
+.badge-row{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.info-item .ilabel{font-size:10px;color:var(--gray-400);display:flex;align-items:center;gap:4px;margin-bottom:2px;min-height:20px}
+.info-item .ivalue{font-size:13px;font-weight:600;color:var(--gray-900)}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.sticky-apply{display:block;margin-top:14px}
+.similar-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+
+/* === Application Tracker === */
+.tracker-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.tracker-content{display:grid;grid-template-columns:1fr;gap:14px}
+.progress-item{margin-bottom:12px}
+.progress-item .phead{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
+.progress-item .phead .plabel{color:var(--gray-500);font-weight:600}
+.progress-item .phead .pval{color:var(--gray-400)}
+
+/* === Resume Assistant === */
+.resume-layout{display:grid;grid-template-columns:1fr;gap:14px}
+.upload-zone{border:2px dashed var(--gray-200);border-radius:var(--radius);padding:28px 14px;text-align:center}
+.upload-zone .uicon{width:44px;height:44px;margin:0 auto 12px;background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--gray-400)}
+.upload-zone .utext{font-size:13px;font-weight:600;color:var(--gray-900);margin-bottom:4px}
+.upload-zone .usub{font-size:11px;color:var(--gray-400);margin-bottom:12px}
+.ats-score{display:flex;align-items:center;gap:16px}
+.ats-circle{width:64px;height:64px;border-radius:50%;border:4px solid var(--gray-500);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--gray-900);flex-shrink:0}
+.ats-info .ats-label{font-size:13px;font-weight:600;color:var(--gray-900)}
+.ats-info .ats-sub{font-size:11px;color:var(--gray-400)}
+.suggestion-item{display:flex;gap:12px;padding:12px;border-radius:var(--radius-sm);border:1px solid var(--gray-200)}
+.suggestion-item.highlight{background:var(--gray-100);border-color:var(--gray-300)}
+.sug-num{width:28px;height:28px;border-radius:50%;background:var(--gray-200);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--gray-500);flex-shrink:0}
+.suggestion-item.highlight .sug-num{background:var(--gray-600);color:#fff}
+
+/* === Notifications === */
+.notif-tabs{display:flex;gap:4px;padding:0 0 10px;border-bottom:1px solid var(--gray-200);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.notif-tab{padding:8px 16px;font-size:12px;border-radius:var(--radius-sm);color:var(--gray-400);white-space:nowrap;background:none;border:none;cursor:default;min-height:44px}
+.notif-tab.active{background:var(--gray-100);color:var(--gray-700);font-weight:600}
+.notif-item{display:flex;gap:12px;padding:14px 0;align-items:flex-start}
+.notif-item+.notif-item{border-top:1px solid var(--gray-100)}
+.notif-item.unread{background:var(--gray-50);margin:0 -14px;padding:14px;border-radius:var(--radius-sm)}
+
+/* === Profile === */
+.profile-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.profile-header .pinfo h3{font-size:15px;font-weight:700;color:var(--gray-900)}
+.profile-header .pinfo .prole{font-size:12px;color:var(--gray-400)}
+.profile-layout{display:grid;grid-template-columns:1fr;gap:14px}
+.skills-grid{display:flex;flex-wrap:wrap;gap:6px}
+.exp-item{display:flex;gap:12px;padding:12px 0}
+.exp-item+.exp-item{border-top:1px solid var(--gray-100)}
+
+/* === Settings === */
+.settings-layout{display:grid;grid-template-columns:1fr;gap:14px}
+.settings-tabs{display:flex;gap:4px;flex-wrap:wrap}
+.settings-tab{padding:10px 16px;font-size:12px;border-radius:var(--radius-sm);color:var(--gray-400);background:none;border:none;cursor:default;white-space:nowrap;min-height:44px}
+.settings-tab.active{background:var(--gray-100);color:var(--gray-700);font-weight:600}
+.form-grid{display:grid;grid-template-columns:1fr;gap:12px}
+
+/* === Auth === */
+.auth-page{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px}
+.auth-card{width:100%;max-width:380px}
+.auth-header{text-align:center;margin-bottom:24px}
+.auth-logo{width:44px;height:44px;margin:0 auto 12px;background:var(--gray-800);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}
+.auth-header h2{font-size:20px;font-weight:700;color:var(--gray-900)}
+.auth-header p{font-size:13px;color:var(--gray-400);margin-top:4px}
+.auth-link{text-align:center;font-size:13px;color:var(--gray-400);margin-top:16px;padding:4px 0}
+.auth-link a{color:var(--gray-700);font-weight:600}
+
+/* === Screen nav toggle === */
+.screen{display:none}
+.screen:target{display:block}
+.screen.active{display:block}
+
+/* === Utility: hide columns on mobile === */
+.hide-mobile{display:table-cell}
+@media(max-width:767px){.hide-mobile{display:none!important}}
+
+/* ===================================================== */
+/*             MOBILE-FIRST BREAKPOINTS                   */
+/* ===================================================== */
+
+/* Base: below 320px */
+.screen-main{padding:8px 0;max-width:1440px;margin:0 auto}
+
+/* 320px — smallest screens */
+@media(min-width:320px){
+  .screen-main{padding:6px 0}
+  .stats-grid{gap:8px}
+  .pagination .page{min-width:40px;height:40px;font-size:11px}
+}
+
+/* 375px */
+@media(min-width:375px){
+  .screen-main{padding:10px 0}
+  .stats-grid{gap:12px}
+  .screen-header{padding:12px 14px}
+  .screen-header h2{font-size:18px}
+}
+
+/* 425px — stats go 2-col, tables scroll */
+@media(min-width:425px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+
+}
+
+/* 768px — tablet */
+@media(min-width:768px){
+  .screen-nav{padding:0 24px;gap:14px}
+  .screen-nav .brand{display:block}
+  .screen-nav .screen-list{display:flex}
+  .screen-nav .mobile-menu-btn{display:none}
+  .screen-header{padding:14px 24px}
+  .screen-header h2{font-size:20px}
+  .screen-header .actions{gap:8px}
+
+  /* Touch → compact on tablet+ */
+  .btn{min-height:36px;padding:0 16px;font-size:12px}
+  .btn-sm{min-height:30px;padding:0 12px;font-size:11px}
+  .btn-xs{min-height:26px;padding:0 10px;font-size:10px}
+  .input{min-height:36px;font-size:12px;padding:0 12px}
+
+  .stats-grid{grid-template-columns:repeat(4,1fr);gap:16px}
+  .dash-content{grid-template-columns:2fr 1fr;gap:16px}
+  .dash-bottom{grid-template-columns:1fr 1fr;gap:16px}
+  .search-layout{grid-template-columns:200px 1fr;gap:20px}
+  .details-layout{grid-template-columns:1fr 280px;gap:20px}
+  .sticky-apply{position:sticky;top:calc(var(--nav-h) + 16px)}
+  .info-grid{grid-template-columns:repeat(4,1fr);gap:12px}
+  .tracker-stats{grid-template-columns:repeat(4,1fr);gap:16px}
+  .tracker-content{grid-template-columns:5fr 7fr;gap:20px}
+  .resume-layout{grid-template-columns:7fr 5fr;gap:20px}
+  .profile-layout{grid-template-columns:4fr 8fr;gap:20px}
+  .settings-layout{grid-template-columns:160px 1fr;gap:20px}
+  .settings-tabs{flex-direction:column}
+  .job-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .screen-main{padding:24px}
+  .pagination .page{width:36px;height:36px;min-width:36px}
+  .badge{min-height:22px;padding:2px 10px}
+  .tag{padding:4px 10px}
+  .avatar{width:36px;height:36px;font-size:11px}
+  .avatar-sm{width:28px;height:28px;font-size:9px}
+  .avatar-lg{width:48px;height:48px;font-size:13px}
+  .initial-box{width:36px;height:36px;font-size:10px}
+  .toggle{width:36px;height:20px}
+  .toggle::after{width:16px;height:16px;top:2px;left:2px}
+  .toggle.on::after{left:18px}
+  .progress-bar{height:6px}
+  .check-item .box{width:14px;height:14px}
+  .check-item{min-height:auto}
+  .pagination .page{min-width:auto;height:auto}
+  .notif-tab{padding:6px 14px;font-size:11px;min-height:auto}
+  .settings-tab{padding:8px 14px;font-size:11px;min-height:auto}
+
+  /* Hide mobile drawer on tablet+ */
+  .sidebar-overlay{display:none !important}
+}
+
+/* 1024px — desktop */
+@media(min-width:1024px){
+  .screen-nav{padding:0 32px}
+  .screen-header{padding:14px 32px}
+  .screen-header h2{font-size:22px}
+  .job-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .form-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .screen-main{padding:32px}
+}
+
+/* 1440px — large desktop */
+@media(min-width:1440px){
+  .job-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .stats-grid{gap:20px}
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- Global Nav -->
+<!-- ============================================ -->
+<nav class="screen-nav">
+  <button class="mobile-menu-btn" onclick="document.getElementById('sidebarOverlay').classList.toggle('open')" aria-label="Menu">☰</button>
+  <div class="logo">GA</div>
+  <span class="brand">GotJobAlert</span>
+  <div class="screen-list">
+    <a href="#dashboard" class="active">Dashboard</a>
+    <a href="#search">Job Search</a>
+    <a href="#details">Job Details</a>
+    <a href="#saved">Saved Jobs</a>
+    <a href="#tracker">Applications</a>
+    <a href="#resume">Resume</a>
+    <a href="#notifications">Notifications</a>
+    <a href="#profile">Profile</a>
+    <a href="#settings">Settings</a>
+    <a href="#login">Login</a>
+    <a href="#register">Register</a>
+  </div>
+</nav>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="if(event.target===this||event.target.classList.contains('backdrop'))closeSidebar()">
+  <div class="backdrop"></div>
+  <div class="sidebar-drawer">
+    <div class="logo-area">
+      <div class="logo">GA</div>
+      <span class="brand">GotJobAlert</span>
+    </div>
+    <a href="#dashboard" onclick="closeSidebar()">Dashboard</a>
+    <a href="#search" onclick="closeSidebar()">Job Search</a>
+    <a href="#details" onclick="closeSidebar()">Job Details</a>
+    <a href="#saved" onclick="closeSidebar()">Saved Jobs</a>
+    <a href="#tracker" onclick="closeSidebar()">Application Tracker</a>
+    <a href="#resume" onclick="closeSidebar()">Resume Assistant</a>
+    <a href="#notifications" onclick="closeSidebar()">Notifications</a>
+    <a href="#profile" onclick="closeSidebar()">Profile</a>
+    <a href="#settings" onclick="closeSidebar()">Settings</a>
+    <div class="divider"></div>
+    <a href="#login" onclick="closeSidebar()">Login</a>
+    <a href="#register" onclick="closeSidebar()">Register</a>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- DASHBOARD -->
+<!-- ============================================ -->
+<section class="screen active" id="dashboard">
+  <div class="screen-header">
+    <div class="breadcrumb">Home / Dashboard</div>
+    <div class="flex-row">
+      <h2>Dashboard</h2>
+      <div class="actions">
+        <span class="btn btn-sm btn-ghost">Export</span>
+        <span class="btn btn-sm btn-primary">Post a Job</span>
+      </div>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="stats-grid">
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+          <div style="width:16px;height:16px;background:var(--gray-200);border-radius:4px;flex-shrink:0"></div>
+          <span style="font-size:11px;color:var(--gray-400)">Total Applications</span>
+        </div>
+        <div style="font-size:22px;font-weight:700;color:var(--gray-900)">248</div>
+        <div style="font-size:10px;color:var(--gray-400);margin-top:2px">↑ 12% vs last month</div>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+          <div style="width:16px;height:16px;background:var(--gray-200);border-radius:4px;flex-shrink:0"></div>
+          <span style="font-size:11px;color:var(--gray-400)">Active Jobs</span>
+        </div>
+        <div style="font-size:22px;font-weight:700;color:var(--gray-900)">36</div>
+        <div style="font-size:10px;color:var(--gray-400);margin-top:2px">↑ 4 this week</div>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+          <div style="width:16px;height:16px;background:var(--gray-200);border-radius:4px;flex-shrink:0"></div>
+          <span style="font-size:11px;color:var(--gray-400)">Interviews</span>
+        </div>
+        <div style="font-size:22px;font-weight:700;color:var(--gray-900)">14</div>
+        <div style="font-size:10px;color:var(--gray-400);margin-top:2px">↑ 2 scheduled</div>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+          <div style="width:16px;height:16px;background:var(--gray-200);border-radius:4px;flex-shrink:0"></div>
+          <span style="font-size:11px;color:var(--gray-400)">Offers</span>
+        </div>
+        <div style="font-size:22px;font-weight:700;color:var(--gray-900)">7</div>
+        <div style="font-size:10px;color:var(--gray-400);margin-top:2px">↑ 3 this month</div>
+      </div>
+    </div>
+
+    <div class="dash-content">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span style="font-size:12px;font-weight:600;color:var(--gray-900)">Recent Applications</span>
+          <span style="font-size:10px;color:var(--gray-400);font-weight:600">View All →</span>
+        </div>
+        <div class="recent-table">
+          <table class="table">
+            <thead><tr><th>Position</th><th>Company</th><th class="hide-mobile">Date</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><div class="cell-flex"><span class="avatar-sm">G</span><span style="font-weight:600;color:var(--gray-900)">Sr. Frontend Eng.</span></div></td><td>Google</td><td class="hide-mobile">2 days ago</td><td><span class="badge badge-blue">Interview</span></td></tr>
+              <tr><td><div class="cell-flex"><span class="avatar-sm">S</span><span style="font-weight:600;color:var(--gray-900)">Full Stack Dev.</span></div></td><td>Stripe</td><td class="hide-mobile">3 days ago</td><td><span class="badge badge-green">Offer</span></td></tr>
+              <tr><td><div class="cell-flex"><span class="avatar-sm">M</span><span style="font-weight:600;color:var(--gray-900)">React Native Dev.</span></div></td><td>Microsoft</td><td class="hide-mobile">5 days ago</td><td><span class="badge">Applied</span></td></tr>
+              <tr><td><div class="cell-flex"><span class="avatar-sm">N</span><span style="font-weight:600;color:var(--gray-900)">Product Designer</span></div></td><td>Notion</td><td class="hide-mobile">1 week ago</td><td><span class="badge badge-red">Rejected</span></td></tr>
+              <tr><td><div class="cell-flex"><span class="avatar-sm">A</span><span style="font-weight:600;color:var(--gray-900)">Backend Engineer</span></div></td><td>Amazon</td><td class="hide-mobile">1 week ago</td><td><span class="badge badge-blue">Interview</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span style="font-size:12px;font-weight:600;color:var(--gray-900)">Recommended Jobs</span>
+          <span style="font-size:10px;color:var(--gray-400);font-weight:600">View All →</span>
+        </div>
+        <div>
+          <div class="job-card">
+            <div class="initial-box">G</div>
+            <div class="job-info">
+              <div class="title">Senior Frontend Engineer</div>
+              <div class="meta">Google — Remote</div>
+              <div class="salary">$150k–$200k</div>
+            </div>
+          </div>
+          <div class="job-card">
+            <div class="initial-box">S</div>
+            <div class="job-info">
+              <div class="title">Full Stack Engineer</div>
+              <div class="meta">Stripe — San Francisco</div>
+              <div class="salary">$160k–$220k</div>
+            </div>
+          </div>
+          <div class="job-card">
+            <div class="initial-box">N</div>
+            <div class="job-info">
+              <div class="title">Product Designer</div>
+              <div class="meta">Notion — Remote</div>
+              <div class="salary">$130k–$170k</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-bottom">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span style="font-size:12px;font-weight:600;color:var(--gray-900)">Upcoming Interviews</span>
+          <span style="font-size:10px;color:var(--gray-400);font-weight:600">View All →</span>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
+            <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Google — Frontend</div><div style="font-size:10px;color:var(--gray-400)">Tomorrow, 11:00 AM</div></div>
+            <div style="display:flex;gap:6px;align-items:center"><span class="badge badge-blue">Virtual</span><span style="font-size:10px;color:var(--gray-400)">45m</span></div>
+          </div>
+          <div class="divider"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
+            <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Stripe — Full Stack</div><div style="font-size:10px;color:var(--gray-400)">Wed, 2:00 PM</div></div>
+            <div style="display:flex;gap:6px;align-items:center"><span class="badge">On-site</span><span style="font-size:10px;color:var(--gray-400)">60m</span></div>
+          </div>
+          <div class="divider"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
+            <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Notion — Design</div><div style="font-size:10px;color:var(--gray-400)">Fri, 10:30 AM</div></div>
+            <div style="display:flex;gap:6px;align-items:center"><span class="badge badge-blue">Virtual</span><span style="font-size:10px;color:var(--gray-400)">30m</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span style="font-size:12px;font-weight:600;color:var(--gray-900)">Activity Timeline</span>
+          <span style="font-size:10px;color:var(--gray-400);font-weight:600">This Week</span>
+        </div>
+        <div>
+          <div style="display:flex;gap:10px;padding:8px 0">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--gray-600);flex-shrink:0"></div>
+              <div style="width:2px;height:28px;background:var(--gray-200)"></div>
+            </div>
+            <div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Applied to Google</div><div style="font-size:10px;color:var(--gray-400)">2 hours ago</div></div>
+          </div>
+          <div style="display:flex;gap:10px;padding:8px 0">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--gray-600);flex-shrink:0"></div>
+              <div style="width:2px;height:28px;background:var(--gray-200)"></div>
+            </div>
+            <div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Resume reviewed by Stripe</div><div style="font-size:10px;color:var(--gray-400)">Yesterday</div></div>
+          </div>
+          <div style="display:flex;gap:10px;padding:8px 0">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--gray-800);flex-shrink:0;box-shadow:0 0 0 3px var(--gray-200)"></div>
+              <div style="width:2px;height:28px;background:var(--gray-200)"></div>
+            </div>
+            <div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Interview scheduled with Notion</div><div style="font-size:10px;color:var(--gray-400)">2 days ago</div></div>
+          </div>
+          <div style="display:flex;gap:10px;padding:8px 0">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--gray-300);flex-shrink:0"></div>
+            </div>
+            <div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Offer from Microsoft</div><div style="font-size:10px;color:var(--gray-400)">4 days ago</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:12px;font-weight:600;color:var(--gray-900)">Quick Actions</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span class="btn btn-sm btn-primary">Post New Job</span>
+          <span class="btn btn-sm">Upload Resume</span>
+          <span class="btn btn-sm">Create Job Alert</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- JOB SEARCH -->
+<!-- ============================================ -->
+<section class="screen" id="search">
+  <div class="screen-header">
+    <div class="breadcrumb">Jobs / Job Search</div>
+    <div class="flex-row">
+      <h2>Job Search</h2>
+      <div class="actions">
+        <span class="btn btn-sm btn-ghost">Save Search</span>
+        <span class="btn btn-sm btn-primary">Create Alert</span>
+      </div>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="search-bar-wrap">
+      <div class="search-icon"></div>
+      <input type="text" placeholder="Search job title, company, or keyword..." readonly>
+      <span class="btn btn-sm btn-ghost">Clear</span>
+      <span class="btn btn-sm btn-primary">Search</span>
+    </div>
+
+    <div class="search-layout" style="margin-top:16px">
+      <div class="filter-panel">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <h4>Filters</h4>
+          <div style="width:16px;height:16px;background:var(--gray-200);border-radius:3px"></div>
+        </div>
+        <div class="filter-group">
+          <label>Job Type</label>
+          <div class="check-list">
+            <div class="check-item"><div class="box checked"></div> Full-time</div>
+            <div class="check-item"><div class="box"></div> Part-time</div>
+            <div class="check-item"><div class="box"></div> Contract</div>
+            <div class="check-item"><div class="box checked"></div> Remote</div>
+            <div class="check-item"><div class="box"></div> Internship</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="filter-group">
+          <label>Experience</label>
+          <div class="check-list">
+            <div class="check-item"><div class="box"></div> Entry (0–2 yrs)</div>
+            <div class="check-item"><div class="box checked"></div> Mid (3–5 yrs)</div>
+            <div class="check-item"><div class="box"></div> Senior (6–8 yrs)</div>
+            <div class="check-item"><div class="box"></div> Lead (9+ yrs)</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="filter-group">
+          <label>Salary Range</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input class="input" type="text" placeholder="Min" readonly style="width:80px">
+            <span style="color:var(--gray-300)">–</span>
+            <input class="input" type="text" placeholder="Max" readonly style="width:80px">
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="filter-group">
+          <label>Location</label>
+          <input class="input" type="text" placeholder="City, state, or remote" readonly>
+        </div>
+        <div class="divider"></div>
+        <div class="filter-group">
+          <label>Posted Within</label>
+          <div class="input" style="display:flex;align-items:center;color:var(--gray-400)">Any time</div>
+        </div>
+        <span class="btn btn-sm" style="width:100%;margin-top:8px">Apply Filters</span>
+        <div style="text-align:center;margin-top:8px;font-size:10px;color:var(--gray-400)">Reset Filters</div>
+      </div>
+
+      <div>
+        <div class="results-header">
+          <span class="count">Showing <strong style="color:var(--gray-900)">24</strong> results</span>
+          <div class="sort"><span>Sort by:</span><div class="pill">Most Relevant</div></div>
+        </div>
+
+        <div class="job-grid">
+          <div class="card">
+            <div style="display:flex;gap:10px;margin-bottom:8px">
+              <div class="initial-box">G</div>
+              <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Senior Frontend Engineer</div><div style="font-size:10px;color:var(--gray-400)">Google — Remote</div></div>
+            </div>
+            <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Build and scale Google Workspace frontend applications using React and TypeScript.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+              <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">GraphQL</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12px;font-weight:700;color:var(--gray-900)">$150k–$200k</span>
+              <span class="btn btn-sm">View</span>
+            </div>
+          </div>
+          <div class="card">
+            <div style="display:flex;gap:10px;margin-bottom:8px">
+              <div class="initial-box">S</div>
+              <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Full Stack Engineer</div><div style="font-size:10px;color:var(--gray-400)">Stripe — San Francisco</div></div>
+            </div>
+            <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Build payment infrastructure APIs and dashboards for millions of businesses.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+              <span class="tag">Python</span><span class="tag">React</span><span class="tag">PostgreSQL</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12px;font-weight:700;color:var(--gray-900)">$160k–$220k</span>
+              <span class="btn btn-sm">View</span>
+            </div>
+          </div>
+          <div class="card">
+            <div style="display:flex;gap:10px;margin-bottom:8px">
+              <div class="initial-box">N</div>
+              <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Product Designer</div><div style="font-size:10px;color:var(--gray-400)">Notion — Remote</div></div>
+            </div>
+            <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Design intuitive collaboration tools for millions of users worldwide.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+              <span class="tag">Figma</span><span class="tag">Design</span><span class="tag">Research</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12px;font-weight:700;color:var(--gray-900)">$130k–$170k</span>
+              <span class="btn btn-sm">View</span>
+            </div>
+          </div>
+          <div class="card">
+            <div style="display:flex;gap:10px;margin-bottom:8px">
+              <div class="initial-box">M</div>
+              <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">React Native Developer</div><div style="font-size:10px;color:var(--gray-400)">Microsoft — Redmond</div></div>
+            </div>
+            <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Develop cross-platform mobile experiences for Microsoft 365 suite.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+              <span class="tag">React Native</span><span class="tag">TypeScript</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12px;font-weight:700;color:var(--gray-900)">$130k–$170k</span>
+              <span class="btn btn-sm">View</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <span class="page active">1</span>
+          <span class="page">2</span>
+          <span class="page">3</span>
+          <span class="page">4</span>
+          <span class="page">5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- JOB DETAILS -->
+<!-- ============================================ -->
+<section class="screen" id="details">
+  <div class="screen-header">
+    <div class="breadcrumb">Jobs / Search / Senior Frontend Engineer</div>
+    <div class="flex-row">
+      <h2>Senior Frontend Engineer</h2>
+      <div class="actions">
+        <span class="btn btn-sm btn-ghost">Save Job</span>
+        <span class="btn btn-sm btn-primary">Apply Now</span>
+      </div>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="details-layout">
+      <div>
+        <div class="card">
+          <div class="company-header">
+            <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:var(--gray-100);border:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--gray-400);flex-shrink:0">G</div>
+            <div class="info">
+              <h3>Google</h3>
+              <div class="loc">Mountain View, CA (Remote Eligible)</div>
+              <div class="badge-row">
+                <span class="badge badge-blue">Full-time</span>
+                <span class="badge">Senior</span>
+                <span class="badge">Remote OK</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:12px">Job Information</h4>
+          <div class="info-grid">
+            <div class="info-item"><div class="ilabel"><div style="width:12px;height:12px;background:var(--gray-200);border-radius:2px"></div> Salary</div><div class="ivalue">$150k–$200k</div></div>
+            <div class="info-item"><div class="ilabel"><div style="width:12px;height:12px;background:var(--gray-200);border-radius:2px"></div> Experience</div><div class="ivalue">5–7 years</div></div>
+            <div class="info-item"><div class="ilabel"><div style="width:12px;height:12px;background:var(--gray-200);border-radius:2px"></div> Location</div><div class="ivalue">Remote, USA</div></div>
+            <div class="info-item"><div class="ilabel"><div style="width:12px;height:12px;background:var(--gray-200);border-radius:2px"></div> Posted</div><div class="ivalue">2 days ago</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:10px">Required Skills</h4>
+          <div class="skills-wrap">
+            <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">GraphQL</span><span class="tag">Next.js</span>
+            <span class="tag">Node.js</span><span class="tag">Jest</span><span class="tag">CSS/SASS</span><span class="tag">Webpack</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:10px">Responsibilities</h4>
+          <div style="font-size:11px;color:var(--gray-600);line-height:1.8">
+            <div>• Build and maintain frontend applications for Google Workspace.</div>
+            <div>• Collaborate with design and product teams to define UI requirements.</div>
+            <div>• Write unit and integration tests to ensure code quality.</div>
+            <div>• Mentor junior developers and conduct code reviews.</div>
+            <div>• Optimize applications for maximum speed and scalability.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:10px">Requirements</h4>
+          <div style="font-size:11px;color:var(--gray-600);line-height:1.8">
+            <div>• 5+ years of experience in frontend development.</div>
+            <div>• Strong proficiency in React, TypeScript, and modern CSS.</div>
+            <div>• Experience with GraphQL APIs and state management.</div>
+            <div>• Bachelor's degree in Computer Science or equivalent.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:10px">Benefits</h4>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;color:var(--gray-600)">
+            <div>✓ Health & dental insurance</div>
+            <div>✓ 401(k) matching</div>
+            <div>✓ Unlimited PTO</div>
+            <div>✓ Home office stipend</div>
+            <div>✓ Equity packages</div>
+            <div>✓ Learning & development</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:10px">Company Information</h4>
+          <div style="display:flex;gap:10px">
+            <div style="width:40px;height:40px;border-radius:var(--radius-sm);background:var(--gray-100);border:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--gray-400);flex-shrink:0">G</div>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--gray-900)">About Google</div>
+              <div style="font-size:10px;color:var(--gray-500);margin-top:4px;line-height:1.5">Google LLC is an American multinational technology company specializing in internet-related services and products. Google serves billions of users worldwide.</div>
+              <div style="display:flex;gap:16px;margin-top:8px;font-size:10px;color:var(--gray-400)"><span>Founded: 1998</span><span>Employees: 180k+</span><span>Industry: Technology</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sticky-apply">
+          <div class="card" style="margin-bottom:16px">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900);margin-bottom:8px">Apply for this job</div>
+            <span class="btn btn-primary" style="width:100%;margin-bottom:6px">Apply Now</span>
+            <span class="btn" style="width:100%">Save for Later</span>
+            <div class="divider"></div>
+            <div style="font-size:10px;color:var(--gray-400)">Applications close in <strong style="color:var(--gray-600)">14 days</strong></div>
+            <div style="font-size:10px;color:var(--gray-400);margin-top:4px"><strong style="color:var(--gray-600)">246</strong> applicants already applied</div>
+          </div>
+
+          <div class="card">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900);margin-bottom:8px">Similar Jobs</div>
+            <div class="similar-list">
+              <div style="display:flex;gap:8px;align-items:center"><div class="initial-box" style="width:28px;height:28px;font-size:8px">L</div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Staff Engineer</div><div style="font-size:10px;color:var(--gray-400)">LinkedIn — $180k–$250k</div></div></div>
+              <div class="divider" style="margin:6px 0"></div>
+              <div style="display:flex;gap:8px;align-items:center"><div class="initial-box" style="width:28px;height:28px;font-size:8px">F</div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">UI Engineer</div><div style="font-size:10px;color:var(--gray-400)">Figma — $120k–$160k</div></div></div>
+              <div class="divider" style="margin:6px 0"></div>
+              <div style="display:flex;gap:8px;align-items:center"><div class="initial-box" style="width:28px;height:28px;font-size:8px">S</div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Full Stack Developer</div><div style="font-size:10px;color:var(--gray-400)">Stripe — $160k–$220k</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mobile-apply" style="margin-top:16px">
+          <span class="btn btn-primary" style="width:100%">Apply Now</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SAVED JOBS -->
+<!-- ============================================ -->
+<section class="screen" id="saved">
+  <div class="screen-header">
+    <div class="breadcrumb">Jobs / Saved Jobs</div>
+    <div class="flex-row">
+      <h2>Saved Jobs</h2>
+      <span class="btn btn-sm btn-ghost">Remove All</span>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px">
+      <div style="display:flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:8px 12px">
+        <div style="width:14px;height:14px;background:var(--gray-200);border-radius:3px;flex-shrink:0"></div>
+        <input class="input" type="text" placeholder="Search saved jobs..." readonly style="border:none;height:auto;padding:0">
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;justify-content:flex-end">
+        <span style="font-size:11px;color:var(--gray-400)">Sort:</span>
+        <div class="btn btn-sm" style="width:130px;justify-content:space-between">Recently Saved <span style="color:var(--gray-300)">▼</span></div>
+      </div>
+    </div>
+
+    <div class="job-grid" style="grid-template-columns:1fr">
+      <div class="card">
+        <div style="display:flex;gap:10px;margin-bottom:8px">
+          <div class="initial-box">G</div>
+          <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Senior Frontend Engineer</div><div style="font-size:10px;color:var(--gray-400)">Google — Remote</div></div>
+        </div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">React, TypeScript, GraphQL — $150k–$200k</div>
+        <div style="display:flex;gap:6px;padding-top:8px;border-top:1px solid var(--gray-100)">
+          <span class="btn btn-sm btn-primary">Apply</span>
+          <span class="btn btn-sm">Remove</span>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;gap:10px;margin-bottom:8px">
+          <div class="initial-box">S</div>
+          <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Full Stack Engineer</div><div style="font-size:10px;color:var(--gray-400)">Stripe — San Francisco</div></div>
+        </div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Python, React, PostgreSQL — $160k–$220k</div>
+        <div style="display:flex;gap:6px;padding-top:8px;border-top:1px solid var(--gray-100)">
+          <span class="btn btn-sm btn-primary">Apply</span>
+          <span class="btn btn-sm">Remove</span>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;gap:10px;margin-bottom:8px">
+          <div class="initial-box">N</div>
+          <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Product Designer</div><div style="font-size:10px;color:var(--gray-400)">Notion — Remote</div></div>
+        </div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Figma, Design, Research — $130k–$170k</div>
+        <div style="display:flex;gap:6px;padding-top:8px;border-top:1px solid var(--gray-100)">
+          <span class="btn btn-sm btn-primary">Apply</span>
+          <span class="btn btn-sm">Remove</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination">
+      <span class="page active">1</span>
+      <span class="page">2</span>
+      <span class="page">3</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- APPLICATION TRACKER -->
+<!-- ============================================ -->
+<section class="screen" id="tracker">
+  <div class="screen-header">
+    <div class="breadcrumb">Applications / Tracker</div>
+    <div class="flex-row">
+      <h2>Application Tracker</h2>
+      <div class="actions">
+        <span class="btn btn-sm btn-ghost">Export CSV</span>
+        <span class="btn btn-sm btn-primary">Add Application</span>
+      </div>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="tracker-stats">
+      <div class="card card-sm" style="text-align:center"><div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;font-weight:600">Applied</div><div style="font-size:20px;font-weight:700;color:var(--gray-900)">12</div></div>
+      <div class="card card-sm" style="text-align:center"><div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;font-weight:600">Interview</div><div style="font-size:20px;font-weight:700;color:var(--gray-900)">4</div></div>
+      <div class="card card-sm" style="text-align:center"><div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;font-weight:600">Offer</div><div style="font-size:20px;font-weight:700;color:var(--gray-900)">2</div></div>
+      <div class="card card-sm" style="text-align:center"><div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;font-weight:600">Rejected</div><div style="font-size:20px;font-weight:700;color:var(--gray-900)">3</div></div>
+    </div>
+
+    <div class="tracker-content">
+      <div>
+        <div class="card">
+          <div style="font-size:12px;font-weight:600;color:var(--gray-900);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px">Application Timeline</div>
+          <div style="display:flex;gap:10px;padding:8px 0"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;background:var(--gray-600);flex-shrink:0"></div><div style="width:2px;height:28px;background:var(--gray-200)"></div></div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Application Submitted</div><div style="font-size:10px;color:var(--gray-400)">Google — Jul 22, 2026</div></div></div>
+          <div style="display:flex;gap:10px;padding:8px 0"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;background:var(--gray-600);flex-shrink:0"></div><div style="width:2px;height:28px;background:var(--gray-200)"></div></div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Resume Reviewed</div><div style="font-size:10px;color:var(--gray-400)">Google — Jul 24, 2026</div></div></div>
+          <div style="display:flex;gap:10px;padding:8px 0"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;background:var(--gray-800);flex-shrink:0;box-shadow:0 0 0 3px var(--gray-200)"></div><div style="width:2px;height:28px;background:var(--gray-200)"></div></div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Technical Interview</div><div style="font-size:10px;color:var(--gray-400)">Google — Jul 28, 2026</div></div></div>
+          <div style="display:flex;gap:10px;padding:8px 0"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;background:var(--gray-300);flex-shrink:0"></div></div><div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">System Design Round</div><div style="font-size:10px;color:var(--gray-400)">TBD</div></div></div>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-100)">
+            <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--gray-500);font-weight:600">Overall Progress</span><span style="color:var(--gray-900);font-weight:600">55%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div style="font-size:12px;font-weight:600;color:var(--gray-900);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px">Progress Overview</div>
+          <div class="progress-item"><div class="phead"><span class="plabel">Applications</span><span class="pval">12/24</span></div><div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div></div>
+          <div class="progress-item"><div class="phead"><span class="plabel">Interviews</span><span class="pval">4/24</span></div><div class="progress-bar"><div class="progress-fill" style="width:17%"></div></div></div>
+          <div class="progress-item"><div class="phead"><span class="plabel">Offers</span><span class="pval">2/24</span></div><div class="progress-bar"><div class="progress-fill" style="width:8%"></div></div></div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900)">All Applications</div>
+            <div class="btn btn-sm">All Status ▼</div>
+          </div>
+          <div class="recent-table">
+            <table class="table">
+              <thead><tr><th>Company</th><th>Position</th><th class="hide-mobile">Date</th><th>Status</th><th></th></tr></thead>
+              <tbody>
+                <tr><td><div class="cell-flex"><div class="avatar-sm">G</div>Google</div></td><td>Frontend</td><td class="hide-mobile">Jul 22</td><td><span class="badge badge-blue">Interview</span></td><td style="text-align:right;font-size:10px;color:var(--gray-500)">View</td></tr>
+                <tr><td><div class="cell-flex"><div class="avatar-sm">S</div>Stripe</div></td><td>Full Stack</td><td class="hide-mobile">Jul 19</td><td><span class="badge badge-green">Offer</span></td><td style="text-align:right;font-size:10px;color:var(--gray-500)">View</td></tr>
+                <tr><td><div class="cell-flex"><div class="avatar-sm">M</div>Microsoft</div></td><td>React Native</td><td class="hide-mobile">Jul 17</td><td><span class="badge">Applied</span></td><td style="text-align:right;font-size:10px;color:var(--gray-500)">View</td></tr>
+                <tr><td><div class="cell-flex"><div class="avatar-sm">N</div>Notion</div></td><td>Design</td><td class="hide-mobile">Jul 14</td><td><span class="badge badge-red">Rejected</span></td><td style="text-align:right;font-size:10px;color:var(--gray-500)">View</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- RESUME ASSISTANT -->
+<!-- ============================================ -->
+<section class="screen" id="resume">
+  <div class="screen-header">
+    <div class="breadcrumb">Tools / Resume Assistant</div>
+    <div class="flex-row">
+      <h2>Resume Assistant</h2>
+      <span class="btn btn-sm btn-primary">Download Report</span>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="resume-layout">
+      <div>
+        <div class="card">
+          <div class="upload-zone">
+            <div class="uicon">↑</div>
+            <div class="utext">Upload your resume</div>
+            <div class="usub">PDF, DOC, or DOCX — Max 10MB</div>
+            <span class="btn btn-sm btn-primary">Choose File</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px">Resume Preview</div>
+            <div style="display:flex;gap:6px"><span class="btn btn-xs">Download</span><span class="btn btn-xs">Replace</span></div>
+          </div>
+          <div style="border:1px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--gray-50);padding:16px">
+            <div class="line line-lg line-w" style="margin-bottom:8px"></div>
+            <div class="line" style="margin-bottom:4px"></div>
+            <div class="line line-80" style="margin-bottom:4px"></div>
+            <div class="line line-sm line-40" style="margin-bottom:12px"></div>
+            <div class="divider"></div>
+            <div class="line" style="margin-bottom:4px"></div>
+            <div class="line line-80" style="margin-bottom:4px"></div>
+            <div class="line line-40" style="margin-bottom:12px"></div>
+            <div class="divider"></div>
+            <div class="line" style="margin-bottom:4px"></div>
+            <div class="line line-80"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">ATS Score</div>
+          <div class="ats-score">
+            <div class="ats-circle">72</div>
+            <div class="ats-info">
+              <div class="ats-label">Needs Improvement</div>
+              <div class="ats-sub">Target: 85+ for top companies</div>
+              <div class="progress-bar" style="margin-top:8px;width:120px"><div class="progress-fill" style="width:72%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Suggestions</div>
+          <div class="suggestion-item highlight" style="margin-bottom:8px">
+            <div class="sug-num">1</div>
+            <div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Add professional summary</div><div style="font-size:10px;color:var(--gray-400)">Top 3 lines should summarize your experience.</div></div>
+          </div>
+          <div class="suggestion-item" style="margin-bottom:8px">
+            <div class="sug-num">2</div>
+            <div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Quantify achievements</div><div style="font-size:10px;color:var(--gray-400)">Use numbers to show impact.</div></div>
+          </div>
+          <div class="suggestion-item">
+            <div class="sug-num">3</div>
+            <div><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Include relevant keywords</div><div style="font-size:10px;color:var(--gray-400)">Add keywords from job descriptions.</div></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Missing Skills</div>
+          <div class="skills-wrap">
+            <span class="tag" style="background:var(--gray-200);border-color:var(--gray-300)">TypeScript</span>
+            <span class="tag" style="background:var(--gray-200);border-color:var(--gray-300)">GraphQL</span>
+            <span class="tag" style="background:var(--gray-200);border-color:var(--gray-300)">Next.js</span>
+            <span class="tag" style="background:var(--gray-200);border-color:var(--gray-300)">System Design</span>
+            <span class="tag" style="background:var(--gray-200);border-color:var(--gray-300)">AWS</span>
+          </div>
+          <div style="font-size:10px;color:var(--gray-400);margin-top:8px">Consider adding these to improve match rate by up to 40%.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- NOTIFICATIONS -->
+<!-- ============================================ -->
+<section class="screen" id="notifications">
+  <div class="screen-header">
+    <div class="breadcrumb">Account / Notifications</div>
+    <div class="flex-row">
+      <h2>Notifications</h2>
+      <div class="actions">
+        <span class="btn btn-sm btn-ghost">Mark All Read</span>
+        <span class="btn btn-sm">Settings</span>
+      </div>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="card" style="padding:0">
+      <div class="notif-tabs" style="padding:12px 16px 10px;border-bottom:1px solid var(--gray-200)">
+        <span class="notif-tab active">All</span>
+        <span class="notif-tab">Unread</span>
+        <span class="notif-tab">Applications</span>
+        <span class="notif-tab">Interviews</span>
+      </div>
+      <div style="padding:0 16px">
+        <div class="notif-item unread">
+          <div class="dot dot-active"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900)">Application received by Google</div>
+            <div style="font-size:10px;color:var(--gray-400);margin-top:2px">Your application for Senior Frontend Engineer has been received.</div>
+            <div style="font-size:10px;color:var(--gray-300);margin-top:6px">2 hours ago</div>
+          </div>
+          <div style="font-size:10px;color:var(--gray-400);font-weight:600;flex-shrink:0">Dismiss</div>
+        </div>
+        <div class="notif-item unread">
+          <div class="dot dot-active"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900)">Interview scheduled with Stripe</div>
+            <div style="font-size:10px;color:var(--gray-400);margin-top:2px">Your technical interview has been scheduled for Wednesday.</div>
+            <div style="font-size:10px;color:var(--gray-300);margin-top:6px">5 hours ago</div>
+          </div>
+          <div style="font-size:10px;color:var(--gray-400);font-weight:600;flex-shrink:0">Dismiss</div>
+        </div>
+        <div class="notif-item">
+          <div class="dot"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;font-weight:500;color:var(--gray-900)">New job matches available</div>
+            <div style="font-size:10px;color:var(--gray-400);margin-top:2px">We found 5 new job matches based on your profile.</div>
+            <div style="font-size:10px;color:var(--gray-300);margin-top:6px">1 day ago</div>
+          </div>
+          <div style="font-size:10px;color:var(--gray-400);font-weight:600;flex-shrink:0">Dismiss</div>
+        </div>
+        <div class="notif-item">
+          <div class="dot"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;font-weight:500;color:var(--gray-900)">Offer letter from Stripe</div>
+            <div style="font-size:10px;color:var(--gray-400);margin-top:2px">Congratulations! Stripe has sent you an offer letter.</div>
+            <div style="font-size:10px;color:var(--gray-300);margin-top:6px">2 days ago</div>
+          </div>
+          <div style="font-size:10px;color:var(--gray-400);font-weight:600;flex-shrink:0">Dismiss</div>
+        </div>
+        <div class="notif-item" style="border:none">
+          <div class="dot"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;font-weight:500;color:var(--gray-900)">Profile viewed by recruiter</div>
+            <div style="font-size:10px;color:var(--gray-400);margin-top:2px">A recruiter from Amazon viewed your profile.</div>
+            <div style="font-size:10px;color:var(--gray-300);margin-top:6px">3 days ago</div>
+          </div>
+          <div style="font-size:10px;color:var(--gray-400);font-weight:600;flex-shrink:0">Dismiss</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PROFILE -->
+<!-- ============================================ -->
+<section class="screen" id="profile">
+  <div class="screen-header">
+    <div class="breadcrumb">Account / Profile</div>
+    <div class="flex-row">
+      <h2>Profile</h2>
+      <span class="btn btn-sm btn-primary">Edit Profile</span>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="card" style="margin-bottom:16px">
+      <div class="profile-header">
+        <div class="avatar avatar-lg">SK</div>
+        <div class="pinfo">
+          <h3>Sahil Kumar</h3>
+          <div class="prole">Senior Frontend Engineer</div>
+          <div style="display:flex;gap:8px;margin-top:4px;font-size:10px;color:var(--gray-400);flex-wrap:wrap">
+            <span>San Francisco, CA</span><span style="color:var(--gray-300)">·</span><span>sahil@email.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-layout">
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Personal Info</div>
+          <div style="font-size:11px"><div style="margin-bottom:8px"><span style="color:var(--gray-400);font-size:10px">Full Name</span><div style="color:var(--gray-900);font-weight:600;margin-top:2px">Sahil Kumar</div></div><div class="divider"></div>
+          <div style="margin-bottom:8px"><span style="color:var(--gray-400);font-size:10px">Email</span><div style="color:var(--gray-900);font-weight:600;margin-top:2px">sahil@email.com</div></div><div class="divider"></div>
+          <div style="margin-bottom:8px"><span style="color:var(--gray-400);font-size:10px">Phone</span><div style="color:var(--gray-900);font-weight:600;margin-top:2px">+1 (555) 123-4567</div></div><div class="divider"></div>
+          <div><span style="color:var(--gray-400);font-size:10px">Location</span><div style="color:var(--gray-900);font-weight:600;margin-top:2px">San Francisco, CA</div></div></div>
+        </div>
+
+        <div class="card">
+          <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Resume</div>
+          <div style="border:1px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--gray-50);padding:10px;text-align:center">
+            <div style="font-size:10px;color:var(--gray-500);margin-bottom:2px">Sahil_Kumar_Resume.pdf</div>
+            <div style="font-size:10px;color:var(--gray-300);margin-bottom:8px">Uploaded Jul 20, 2026</div>
+            <div style="display:flex;gap:6px;justify-content:center"><span class="btn btn-xs">Download</span><span class="btn btn-xs">Update</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px">Skills</div>
+            <span style="font-size:10px;color:var(--gray-400);font-weight:600">Manage</span>
+          </div>
+          <div class="skills-grid">
+            <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Node.js</span>
+            <span class="tag">GraphQL</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span>
+            <span class="tag">PostgreSQL</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Figma</span>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px">Experience</div>
+            <span style="font-size:10px;color:var(--gray-400);font-weight:600">Add</span>
+          </div>
+          <div class="exp-item"><div class="initial-box" style="width:36px;height:36px;font-size:8px">FB</div><div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Frontend Developer</div><div style="font-size:10px;color:var(--gray-400)">Freelance — 2025–Present</div><div style="font-size:10px;color:var(--gray-500);margin-top:4px">Built responsive web apps using React, TypeScript, and Tailwind CSS.</div></div></div>
+          <div class="exp-item"><div class="initial-box" style="width:36px;height:36px;font-size:8px">TC</div><div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Junior Developer Intern</div><div style="font-size:10px;color:var(--gray-400)">TechCorp — 2024–2025</div><div style="font-size:10px;color:var(--gray-500);margin-top:4px">Assisted in developing internal tools and fixing UI bugs.</div></div></div>
+        </div>
+
+        <div class="card" style="margin-bottom:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px">Education</div>
+            <span style="font-size:10px;color:var(--gray-400);font-weight:600">Add</span>
+          </div>
+          <div class="exp-item"><div class="initial-box" style="width:36px;height:36px;font-size:8px">BCA</div><div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Bachelor of Computer Applications</div><div style="font-size:10px;color:var(--gray-400)">IGNOU — 2026–2029</div><div style="font-size:10px;color:var(--gray-300);margin-top:4px">1st year — Currently pursuing</div></div></div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px">Projects</div>
+            <span style="font-size:10px;color:var(--gray-400);font-weight:600">Add</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div style="border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:10px"><div style="font-size:11px;font-weight:600;color:var(--gray-900)">GotJobAlert Platform</div><div style="font-size:10px;color:var(--gray-400);margin-top:4px">Full-stack job portal with React, Node.js, PostgreSQL.</div></div>
+            <div style="border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:10px"><div style="font-size:11px;font-weight:600;color:var(--gray-900)">Portfolio Website</div><div style="font-size:10px;color:var(--gray-400);margin-top:4px">Built with Next.js and Tailwind CSS.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SETTINGS -->
+<!-- ============================================ -->
+<section class="screen" id="settings">
+  <div class="screen-header">
+    <div class="breadcrumb">Account / Settings</div>
+    <div class="flex-row">
+      <h2>Settings</h2>
+      <span class="btn btn-sm btn-primary">Save Changes</span>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="settings-layout">
+      <div class="settings-tabs">
+        <span class="settings-tab active">Account</span>
+        <span class="settings-tab">Password</span>
+        <span class="settings-tab">Notifications</span>
+        <span class="settings-tab">Privacy</span>
+        <span class="settings-tab">Appearance</span>
+        <span class="settings-tab" style="color:var(--gray-600);font-weight:600">Danger Zone</span>
+      </div>
+
+      <div class="card">
+        <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px">Account Information</div>
+        <div class="form-grid">
+          <div class="input-group"><label>Full Name</label><input class="input" type="text" value="Sahil Kumar" readonly></div>
+          <div class="input-group"><label>Email Address</label><input class="input" type="email" value="sahil@email.com" readonly></div>
+          <div class="input-group"><label>Job Title</label><input class="input" type="text" value="Senior Frontend Engineer" readonly></div>
+          <div class="input-group"><label>Location</label><input class="input" type="text" value="San Francisco, CA" readonly></div>
+        </div>
+        <div class="input-group" style="margin-top:12px"><label>Bio</label><div style="height:60px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:8px 10px;font-size:11px;color:var(--gray-500)">Passionate frontend engineer with 5+ years of experience...</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- LOGIN -->
+<!-- ============================================ -->
+<section class="screen" id="login">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">GA</div>
+        <h2>Welcome back</h2>
+        <p>Sign in to your GotJobAlert account</p>
+      </div>
+      <div class="card" style="padding:20px">
+        <div class="input-group" style="margin-bottom:14px"><label>Email</label><input class="input" type="email" placeholder="you@email.com" readonly></div>
+        <div class="input-group" style="margin-bottom:12px"><label>Password</label><input class="input" type="password" placeholder="········" readonly></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;font-size:11px">
+          <label style="display:flex;align-items:center;gap:6px;color:var(--gray-500);cursor:default"><div class="box checked" style="width:14px;height:14px"></div> Remember me</label>
+          <a href="#" style="color:var(--gray-700);font-weight:600">Forgot password?</a>
+        </div>
+        <span class="btn btn-primary" style="width:100%;margin-bottom:12px">Sign In</span>
+        <div class="auth-link">Don't have an account? <a href="#register">Create one</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- REGISTER -->
+<!-- ============================================ -->
+<section class="screen" id="register">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">GA</div>
+        <h2>Create an account</h2>
+        <p>Start tracking your job applications today</p>
+      </div>
+      <div class="card" style="padding:20px">
+        <div class="input-group" style="margin-bottom:12px"><label>Full Name</label><input class="input" type="text" placeholder="e.g. Sahil Kumar" readonly></div>
+        <div class="input-group" style="margin-bottom:12px"><label>Email</label><input class="input" type="email" placeholder="you@email.com" readonly></div>
+        <div class="input-group" style="margin-bottom:12px"><label>Password</label><input class="input" type="password" placeholder="Min. 8 characters" readonly></div>
+        <div class="input-group" style="margin-bottom:16px"><label>Confirm Password</label><input class="input" type="password" placeholder="Re-enter password" readonly></div>
+        <span class="btn btn-primary" style="width:100%;margin-bottom:12px">Create Account</span>
+        <div class="auth-link">Already have an account? <a href="#login">Sign in</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.screen-nav a').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelectorAll('.screen-nav a').forEach(l => l.classList.remove('active'))
+    this.classList.add('active')
+    closeSidebar()
+  })
+})
+function closeSidebar(){document.getElementById('sidebarOverlay')?.classList.remove('open')}
+</script>
+</body>
+</html>
