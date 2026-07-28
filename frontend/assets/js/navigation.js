@@ -41,3 +41,14 @@ function initNavigation() {
     }
   });
 }
+
+function bindHashLinks(container) {
+  if (!container) return;
+  container.querySelectorAll('a[href^="#"]').forEach(link => {
+    if (link.closest('.screen-nav, .sidebar-overlay')) return;
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      navigateToRoute(link.getAttribute('href'));
+    });
+  });
+}

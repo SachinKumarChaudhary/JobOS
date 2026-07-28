@@ -43,6 +43,10 @@ async function renderPage(hash) {
     document.querySelectorAll('.screen').forEach(section => section.classList.remove('active'));
     screen.classList.add('active');
   }
+
+  if (typeof bindHashLinks === 'function') {
+    bindHashLinks(pageTarget);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
