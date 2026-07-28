@@ -1,0 +1,3 @@
+.screen-nav .screen-list a{transition:all .15s}
+.btn{transition:all .15s}
+.toggle::after{transition:all .15s}

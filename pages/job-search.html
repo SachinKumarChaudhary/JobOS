@@ -1,0 +1,144 @@
+<section class="screen active" id="search">
+  <div class="screen-header">
+    <div class="breadcrumb">Jobs / Job Search</div>
+    <div class="flex-row">
+      <h2>Job Search</h2>
+      <div class="actions">
+        <span class="btn btn-sm btn-ghost">Save Search</span>
+        <span class="btn btn-sm btn-primary">Create Alert</span>
+      </div>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div class="search-bar-wrap">
+      <div class="search-icon"></div>
+      <input type="text" placeholder="Search job title, company, or keyword..." readonly>
+      <span class="btn btn-sm btn-ghost">Clear</span>
+      <span class="btn btn-sm btn-primary">Search</span>
+    </div>
+
+    <div class="search-layout" style="margin-top:16px">
+      <div class="filter-panel">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <h4>Filters</h4>
+          <div style="width:16px;height:16px;background:var(--gray-200);border-radius:3px"></div>
+        </div>
+        <div class="filter-group">
+          <label>Job Type</label>
+          <div class="check-list">
+            <div class="check-item"><div class="box checked"></div> Full-time</div>
+            <div class="check-item"><div class="box"></div> Part-time</div>
+            <div class="check-item"><div class="box"></div> Contract</div>
+            <div class="check-item"><div class="box checked"></div> Remote</div>
+            <div class="check-item"><div class="box"></div> Internship</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="filter-group">
+          <label>Experience</label>
+          <div class="check-list">
+            <div class="check-item"><div class="box"></div> Entry (0–2 yrs)</div>
+            <div class="check-item"><div class="box checked"></div> Mid (3–5 yrs)</div>
+            <div class="check-item"><div class="box"></div> Senior (6–8 yrs)</div>
+            <div class="check-item"><div class="box"></div> Lead (9+ yrs)</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="filter-group">
+          <label>Salary Range</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input class="input" type="text" placeholder="Min" readonly style="width:80px">
+            <span style="color:var(--gray-300)">–</span>
+            <input class="input" type="text" placeholder="Max" readonly style="width:80px">
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="filter-group">
+          <label>Location</label>
+          <input class="input" type="text" placeholder="City, state, or remote" readonly>
+        </div>
+        <div class="divider"></div>
+        <div class="filter-group">
+          <label>Posted Within</label>
+          <div class="input" style="display:flex;align-items:center;color:var(--gray-400)">Any time</div>
+        </div>
+        <span class="btn btn-sm" style="width:100%;margin-top:8px">Apply Filters</span>
+        <div style="text-align:center;margin-top:8px;font-size:10px;color:var(--gray-400)">Reset Filters</div>
+      </div>
+
+      <div>
+        <div class="results-header">
+          <span class="count">Showing <strong style="color:var(--gray-900)">24</strong> results</span>
+          <div class="sort"><span>Sort by:</span><div class="pill">Most Relevant</div></div>
+        </div>
+
+        <div class="job-grid">
+          <div class="card">
+            <div style="display:flex;gap:10px;margin-bottom:8px">
+              <div class="initial-box">G</div>
+              <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Senior Frontend Engineer</div><div style="font-size:10px;color:var(--gray-400)">Google — Remote</div></div>
+            </div>
+            <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Build and scale Google Workspace frontend applications using React and TypeScript.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+              <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">GraphQL</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12px;font-weight:700;color:var(--gray-900)">$150k–$200k</span>
+              <span class="btn btn-sm">View</span>
+            </div>
+          </div>
+          <div class="card">
+            <div style="display:flex;gap:10px;margin-bottom:8px">
+              <div class="initial-box">S</div>
+              <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Full Stack Engineer</div><div style="font-size:10px;color:var(--gray-400)">Stripe — San Francisco</div></div>
+            </div>
+            <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Build payment infrastructure APIs and dashboards for millions of businesses.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+              <span class="tag">Python</span><span class="tag">React</span><span class="tag">PostgreSQL</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12px;font-weight:700;color:var(--gray-900)">$160k–$220k</span>
+              <span class="btn btn-sm">View</span>
+            </div>
+          </div>
+          <div class="card">
+            <div style="display:flex;gap:10px;margin-bottom:8px">
+              <div class="initial-box">N</div>
+              <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Product Designer</div><div style="font-size:10px;color:var(--gray-400)">Notion — Remote</div></div>
+            </div>
+            <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Design intuitive collaboration tools for millions of users worldwide.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+              <span class="tag">Figma</span><span class="tag">Design</span><span class="tag">Research</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12px;font-weight:700;color:var(--gray-900)">$130k–$170k</span>
+              <span class="btn btn-sm">View</span>
+            </div>
+          </div>
+          <div class="card">
+            <div style="display:flex;gap:10px;margin-bottom:8px">
+              <div class="initial-box">M</div>
+              <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">React Native Developer</div><div style="font-size:10px;color:var(--gray-400)">Microsoft — Redmond</div></div>
+            </div>
+            <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Develop cross-platform mobile experiences for Microsoft 365 suite.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+              <span class="tag">React Native</span><span class="tag">TypeScript</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12px;font-weight:700;color:var(--gray-900)">$130k–$170k</span>
+              <span class="btn btn-sm">View</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <span class="page active">1</span>
+          <span class="page">2</span>
+          <span class="page">3</span>
+          <span class="page">4</span>
+          <span class="page">5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

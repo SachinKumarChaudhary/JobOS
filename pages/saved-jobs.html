@@ -1,0 +1,63 @@
+<section class="screen active" id="saved">
+  <div class="screen-header">
+    <div class="breadcrumb">Jobs / Saved Jobs</div>
+    <div class="flex-row">
+      <h2>Saved Jobs</h2>
+      <span class="btn btn-sm btn-ghost">Remove All</span>
+    </div>
+  </div>
+  <div class="screen-main">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px">
+      <div style="display:flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:8px 12px">
+        <div style="width:14px;height:14px;background:var(--gray-200);border-radius:3px;flex-shrink:0"></div>
+        <input class="input" type="text" placeholder="Search saved jobs..." readonly style="border:none;height:auto;padding:0">
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;justify-content:flex-end">
+        <span style="font-size:11px;color:var(--gray-400)">Sort:</span>
+        <div class="btn btn-sm" style="width:130px;justify-content:space-between">Recently Saved <span style="color:var(--gray-300)">▼</span></div>
+      </div>
+    </div>
+
+    <div class="job-grid" style="grid-template-columns:1fr">
+      <div class="card">
+        <div style="display:flex;gap:10px;margin-bottom:8px">
+          <div class="initial-box">G</div>
+          <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Senior Frontend Engineer</div><div style="font-size:10px;color:var(--gray-400)">Google — Remote</div></div>
+        </div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">React, TypeScript, GraphQL — $150k–$200k</div>
+        <div style="display:flex;gap:6px;padding-top:8px;border-top:1px solid var(--gray-100)">
+          <span class="btn btn-sm btn-primary">Apply</span>
+          <span class="btn btn-sm">Remove</span>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;gap:10px;margin-bottom:8px">
+          <div class="initial-box">S</div>
+          <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Full Stack Engineer</div><div style="font-size:10px;color:var(--gray-400)">Stripe — San Francisco</div></div>
+        </div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Python, React, PostgreSQL — $160k–$220k</div>
+        <div style="display:flex;gap:6px;padding-top:8px;border-top:1px solid var(--gray-100)">
+          <span class="btn btn-sm btn-primary">Apply</span>
+          <span class="btn btn-sm">Remove</span>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;gap:10px;margin-bottom:8px">
+          <div class="initial-box">N</div>
+          <div><div style="font-size:12px;font-weight:600;color:var(--gray-900)">Product Designer</div><div style="font-size:10px;color:var(--gray-400)">Notion — Remote</div></div>
+        </div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:10px">Figma, Design, Research — $130k–$170k</div>
+        <div style="display:flex;gap:6px;padding-top:8px;border-top:1px solid var(--gray-100)">
+          <span class="btn btn-sm btn-primary">Apply</span>
+          <span class="btn btn-sm">Remove</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination">
+      <span class="page active">1</span>
+      <span class="page">2</span>
+      <span class="page">3</span>
+    </div>
+  </div>
+</section>
