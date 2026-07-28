@@ -1,33 +1,43 @@
-function initNavigation() {
-  showScreen(window.location.hash.slice(1) || 'dashboard');
-  window.addEventListener('hashchange', () => {
-    showScreen(window.location.hash.slice(1) || 'dashboard');
-  });
-}
-
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const screen = document.getElementById(id);
-  if (screen) screen.classList.add('active');
-  document.querySelectorAll('.screen-nav a, .sidebar-drawer a').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-  });
-}
-
 function closeSidebar() {
   document.getElementById('sidebarOverlay')?.classList.remove('open');
 }
 
-document.querySelectorAll('.screen-nav a, .sidebar-drawer a').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = this.getAttribute('href').slice(1);
-    showScreen(target);
-    history.pushState(null, '', '#' + target);
-    closeSidebar();
+function setActiveNav(hash) {
+  const route = (hash || '#dashboard').replace('#', '') || 'dashboard';
+  document.querySelectorAll('.screen-nav a, .sidebar-overlay a').forEach(link => {
+    const href = link.getAttribute('href') || '';
+    const isActive = href === `#${route}`;
+    link.classList.toggle('active', isActive);
   });
-});
+}
 
-window.addEventListener('hashchange', () => {
-  showScreen(window.location.hash.slice(1) || 'dashboard');
-});
+function navigateToRoute(hash) {
+  const normalizedHash = hash.startsWith('#') ? hash : `#${hash}`;
+  window.location.hash = normalizedHash;
+  setActiveNav(normalizedHash);
+  if (typeof renderPage === 'function') {
+    renderPage(normalizedHash);
+  }
+}
+
+function initNavigation() {
+  document.querySelectorAll('.screen-nav a, .sidebar-overlay a').forEach(link => {
+    const href = link.getAttribute('href') || '';
+    if (!href.startsWith('#')) return;
+
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      closeSidebar();
+      navigateToRoute(href);
+    });
+  });
+
+  setActiveNav(window.location.hash || '#dashboard');
+
+  window.addEventListener('hashchange', function() {
+    setActiveNav(window.location.hash || '#dashboard');
+    if (typeof renderPage === 'function') {
+      renderPage(window.location.hash || '#dashboard');
+    }
+  });
+}
