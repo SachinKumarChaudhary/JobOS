@@ -1,3 +1,12 @@
+import { initNavigation } from './navigation.js';
+import { initDashboard } from './dashboard.js';
+import { initJobs } from './jobs.js';
+import { initProfile } from './profile.js';
+import { initSettings } from './settings.js';
+import { initNotifications } from './notifications.js';
+import { initAuth } from './auth.js';
+import { setLoading, applyTheme, getStoredTheme, showToast } from './utils.js';
+
 const pageRoutes = {
   dashboard: 'pages/dashboard.html',
   search: 'pages/job-search.html',
@@ -14,7 +23,6 @@ const pageRoutes = {
 
 async function loadPageFragments() {
   const navbarTarget = document.getElementById('navbar-root');
-
   const navbarResponse = await fetch('components/navbar.html');
 
   if (navbarTarget && navbarResponse.ok) {
@@ -29,28 +37,60 @@ async function renderPage(hash) {
 
   if (!pageTarget) return;
 
-  const response = await fetch(pagePath);
+  setLoading(true);
+  try {
+    const response = await fetch(pagePath);
 
-  if (!response.ok) {
-    pageTarget.innerHTML = '<section class="screen active"><div class="screen-main"><div class="card">Page not found.</div></div></section>';
-    return;
-  }
+    if (!response.ok) {
+      pageTarget.innerHTML = '<section class="screen active"><div class="screen-main"><div class="card">Page not found.</div></div></section>';
+      return;
+    }
 
-  pageTarget.innerHTML = await response.text();
+    pageTarget.innerHTML = await response.text();
 
-  const screen = pageTarget.querySelector('.screen');
-  if (screen) {
-    document.querySelectorAll('.screen').forEach(section => section.classList.remove('active'));
-    screen.classList.add('active');
+    const screen = pageTarget.querySelector('.screen');
+    if (screen) {
+      document.querySelectorAll('.screen').forEach(section => section.classList.remove('active'));
+      screen.classList.add('active');
+    }
+
+    if (route === 'dashboard') {
+      initDashboard();
+    }
+    if (route === 'search' || route === 'details' || route === 'saved') {
+      initJobs();
+    }
+    if (route === 'profile') {
+      initProfile();
+    }
+    if (route === 'settings') {
+      initSettings();
+    }
+    if (route === 'notifications') {
+      initNotifications();
+    }
+    if (route === 'login' || route === 'register') {
+      initAuth();
+    }
+  } catch (error) {
+    console.error('Page render failed', error);
+    showToast('Unable to load this page');
+  } finally {
+    setLoading(false);
   }
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
+  applyTheme(getStoredTheme());
   await loadPageFragments();
+  initNavigation();
 
-  if (typeof initNavigation === 'function') {
-    initNavigation();
-  }
+  window.addEventListener('app:navigate', function(event) {
+    renderPage(event.detail);
+  });
 
   await renderPage(window.location.hash || '#dashboard');
 });
+
+window.renderPage = renderPage;
+export { renderPage };
