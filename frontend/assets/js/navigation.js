@@ -1,5 +1,13 @@
 function closeSidebar() {
-  document.getElementById('sidebarOverlay')?.classList.remove('open');
+  const overlay = document.getElementById('sidebarOverlay');
+  overlay?.classList.remove('open');
+  document.querySelector('.mobile-menu-btn')?.setAttribute('aria-expanded', 'false');
+}
+
+function toggleSidebar() {
+  const overlay = document.getElementById('sidebarOverlay');
+  const isOpen = overlay?.classList.toggle('open');
+  document.querySelector('.mobile-menu-btn')?.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 }
 
 function setActiveNav(hash) {
@@ -15,9 +23,7 @@ function navigateToRoute(hash) {
   const normalizedHash = hash.startsWith('#') ? hash : `#${hash}`;
   window.location.hash = normalizedHash;
   setActiveNav(normalizedHash);
-  if (typeof renderPage === 'function') {
-    renderPage(normalizedHash);
-  }
+  window.dispatchEvent(new CustomEvent('app:navigate', { detail: normalizedHash }));
 }
 
 function initNavigation() {
@@ -32,23 +38,37 @@ function initNavigation() {
     });
   });
 
-  setActiveNav(window.location.hash || '#dashboard');
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleSidebar();
+    });
 
-  window.addEventListener('hashchange', function() {
-    setActiveNav(window.location.hash || '#dashboard');
-    if (typeof renderPage === 'function') {
-      renderPage(window.location.hash || '#dashboard');
+    menuBtn.addEventListener('touchend', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleSidebar();
+    });
+  }
+
+  document.querySelector('.sidebar-overlay')?.addEventListener('click', function(event) {
+    if (event.target === this || event.target.classList.contains('backdrop')) {
+      closeSidebar();
     }
   });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeSidebar();
+    }
+  });
+
+  setActiveNav(window.location.hash || '#dashboard');
 }
 
-function bindHashLinks(container) {
-  if (!container) return;
-  container.querySelectorAll('a[href^="#"]').forEach(link => {
-    if (link.closest('.screen-nav, .sidebar-overlay')) return;
-    link.addEventListener('click', function(event) {
-      event.preventDefault();
-      navigateToRoute(link.getAttribute('href'));
-    });
-  });
-}
+window.closeSidebar = closeSidebar;
+window.toggleSidebar = toggleSidebar;
+
+export { closeSidebar, toggleSidebar, setActiveNav, navigateToRoute, initNavigation };

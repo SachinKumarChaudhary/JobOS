@@ -17,15 +17,53 @@
         <span class="settings-tab" style="color:var(--gray-600);font-weight:600">Danger Zone</span>
       </div>
 
-      <div class="card">
-        <div style="font-size:12px;font-weight:600;color:var(--gray-900);text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px">Account Information</div>
-        <div class="form-grid">
-          <div class="input-group"><label>Full Name</label><input class="input" type="text" value="Sahil Kumar" readonly></div>
-          <div class="input-group"><label>Email Address</label><input class="input" type="email" value="sahil@email.com" readonly></div>
-          <div class="input-group"><label>Job Title</label><input class="input" type="text" value="Senior Frontend Engineer" readonly></div>
-          <div class="input-group"><label>Location</label><input class="input" type="text" value="San Francisco, CA" readonly></div>
+      <div class="settings-content">
+        <div class="card settings-card">
+          <div class="card-title">Account Information</div>
+          <div class="form-grid">
+            <div class="input-group"><label>Full Name</label><input class="input" type="text" value="Sahil Kumar" readonly></div>
+            <div class="input-group"><label>Email Address</label><input class="input" type="email" value="sahil@email.com" readonly></div>
+            <div class="input-group"><label>Job Title</label><input class="input" type="text" value="Senior Frontend Engineer" readonly></div>
+            <div class="input-group"><label>Location</label><input class="input" type="text" value="San Francisco, CA" readonly></div>
+          </div>
+          <div class="input-group" style="margin-top:12px"><label>Bio</label><div class="bio-box">Passionate frontend engineer with 5+ years of experience...</div></div>
         </div>
-        <div class="input-group" style="margin-top:12px"><label>Bio</label><div style="height:60px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:8px 10px;font-size:11px;color:var(--gray-500)">Passionate frontend engineer with 5+ years of experience...</div></div>
+
+        <div class="card settings-card">
+          <div class="card-title">Notification Preferences</div>
+          <div class="pref-list">
+            <label class="pref-item">
+              <span class="pref-text">
+                <span class="pref-title">Job Alerts</span>
+                <span class="pref-meta">Receive updates when matching jobs are posted.</span>
+              </span>
+              <span class="toggle on"></span>
+            </label>
+            <label class="pref-item">
+              <span class="pref-text">
+                <span class="pref-title">Application Reminders</span>
+                <span class="pref-meta">Get reminders to follow up on active applications.</span>
+              </span>
+              <span class="toggle on"></span>
+            </label>
+            <label class="pref-item">
+              <span class="pref-text">
+                <span class="pref-title">Weekly Summary</span>
+                <span class="pref-meta">A compact overview of your weekly activity.</span>
+              </span>
+              <span class="toggle"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="card settings-card">
+          <div class="card-title">Password</div>
+          <div class="form-grid">
+            <div class="input-group"><label>Current Password</label><input class="input" type="password" value="••••••••" readonly></div>
+            <div class="input-group"><label>New Password</label><input class="input" type="password" value="••••••••" readonly></div>
+            <div class="input-group"><label>Confirm Password</label><input class="input" type="password" value="••••••••" readonly></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
